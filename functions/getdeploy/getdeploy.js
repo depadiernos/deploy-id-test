@@ -22,10 +22,9 @@ exports.handler = function(event, context, callback) {
     axios
       .get(`${deployId}`, options)
       .then(res => {
-        console.log(res.data);
         callback(null, {
           statusCode: 200,
-          body: res.data
+          body: JSON.stringify(res.data.created_at)
         });
       })
       .catch(err => console.log(err));
