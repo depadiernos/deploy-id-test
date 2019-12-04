@@ -41,10 +41,14 @@
           setValue({ ...value, [e.target.name]: e.target.value });
         };
         const handleSubmit = e => {
+          const options = {
+            headers: { "Content-Type": "application/json" },
+          };
           axios
             .post(
               `https://suspicious-bartik-35e93d.netlify.com/.netlify/functions/getdeploy/`,
-              value
+              JSON.stringify(value),
+              options
             )
             .then(res => {
               console.log(res);
