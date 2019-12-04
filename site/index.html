@@ -41,6 +41,7 @@
           setValue({ ...value, [e.target.name]: e.target.value });
         };
         const handleSubmit = e => {
+            e.preventDefault()
           const options = {
             headers: { "Content-Type": "application/json" },
           };
