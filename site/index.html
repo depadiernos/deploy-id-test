@@ -41,12 +41,15 @@
           setValue({ ...value, [e.target.name]: e.target.value });
         };
         const handleSubmit = e => {
-          axios.get(
-            `https://suspicious-bartik-35e93d.netlify.com/.netlify/functions/getdeploy/`,
-            value
-          ).then((res)=>{
-            console.log(res)
-          }).catch(err=>console.log(err))
+          axios
+            .post(
+              `https://suspicious-bartik-35e93d.netlify.com/.netlify/functions/getdeploy/`,
+              value
+            )
+            .then(res => {
+              console.log(res);
+            })
+            .catch(err => console.log(err));
         };
         return (
           <form onSubmit={handleSubmit}>

@@ -21,11 +21,13 @@ function getDeploy(deployId) {
       })
       .catch(err => console.log(err));
   };
-  if (event.httpMethod !== "GET") {
-    return "This function only supports the GET method.";
-  } else {
-    get();
-  }
+
+  get()
+//   if (event.httpMethod !== "GET") {
+//     return "This function only supports the GET method.";
+//   } else {
+//     get();
+//   }
 }
 
 exports.handler = function(event, context, callback) {
