@@ -7,15 +7,17 @@ function extractNetlifySiteFromContext(context) {
 }
 
 function getDeploy(deployId) {
-  const API_URL = "https://api.netlify.com/api/v1/deploys/";
+  const { NF_SECRET } = process.env;
+  const options = {
+    headers: { Authorization: `Bearer ${NF_SECRET}` },
+    baseURL: "https://api.netlify.com/api/v1/deploys/"
+  };
   const get = () => {
     axios
-      .get(`${API_URL}/${deployId}`, {
-        headers: { Authorization: `Bearer ${API_TOKEN}` }
-      })
-      .then(response => {
-        console.log(response.data);
-        return response.data;
+      .get(`${deployId}`, options)
+      .then(res => {
+        console.log(res.data);
+        return res.data;
       })
       .catch(err => console.log(err));
   };
@@ -27,17 +29,15 @@ function getDeploy(deployId) {
 }
 
 exports.handler = function(event, context, callback) {
-  const DEPLOY_ID = event;
-  console.log(event);
-  const { NF_SECRET } = process.env;
+  const { deployId } = JSON.parse(event.body);
+  console.log(deployId);
 
   const parsedContext = extractNetlifySiteFromContext(context);
   console.log(parsedContext);
-  const res = getDeploy(DEPLOY_ID);
+  const resData = getDeploy(deployId);
 
   callback(null, {
     statusCode: 200,
-    body: JSON.stringify(res)
+    body: JSON.stringify(resData)
   });
-}
-
+};
