@@ -43,7 +43,7 @@
         const handleSubmit = e => {
           axios.get(
             `https://suspicious-bartik-35e93d.netlify.com/.netlify/functions/getdeploy/`,
-            value.deployId
+            value
           ).then((res)=>{
             console.log(res)
           }).catch(err=>console.log(err))
