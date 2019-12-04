@@ -23,6 +23,7 @@
       src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"
     ></script>
     <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
     <script src="https://static.zdassets.com/zendesk_app_framework_sdk/2.0/zaf_sdk.min.js"></script>
     <script type="text/babel">
       // Initialise Apps framework client. See also:
@@ -33,10 +34,30 @@
       const domElement = document.getElementById("app");
 
       function App() {
+        const [value, setValue] = React.useState({
+          deployId: ""
+        });
+        const handleChange = e => {
+          setValue({ ...value, [e.target.name]: e.target.value });
+        };
+        const handleSubmit = e => {
+          axios.get(
+            `https://suspicious-bartik-35e93d.netlify.com/.netlify/functions/getdeploy/`,
+            value.deployId
+          ).then((res)=>{
+            console.log(res)
+          }).catch(err=>console.log(err))
+        };
         return (
-          <div>
-            <input type="text" name="deployId" placeholder="deploy id" />
-          </div>
+          <form onSubmit={handleSubmit}>
+            <input
+              type="text"
+              name="deployId"
+              value={value.deployId}
+              onChange={handleChange}
+              placeholder="Deploy ID"
+            />
+          </form>
         );
       }
 
