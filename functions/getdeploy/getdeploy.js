@@ -23,11 +23,6 @@ function getDeploy(deployId) {
   };
 
   get()
-//   if (event.httpMethod !== "GET") {
-//     return "This function only supports the GET method.";
-//   } else {
-//     get();
-//   }
 }
 
 exports.handler = function(event, context, callback) {
@@ -37,9 +32,10 @@ exports.handler = function(event, context, callback) {
   const parsedContext = extractNetlifySiteFromContext(context);
   console.log(parsedContext);
   const resData = getDeploy(deployId);
+  console.log(resData)
 
   callback(null, {
     statusCode: 200,
-    body: JSON.stringify(resData)
+    body: "test"
   });
 };
