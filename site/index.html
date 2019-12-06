@@ -41,9 +41,15 @@
           setValue({ ...value, [e.target.name]: e.target.value });
         };
         const handleSubmit = e => {
-            e.preventDefault()
+          e.preventDefault();
           const options = {
-            headers: { "Content-Type": "application/json" },
+            headers: { "Content-Type": "application/json" }
+          };
+          const query = {
+            query: "",
+            live: false,
+            start: "",
+            end: ""
           };
           axios
             .post(
@@ -52,7 +58,16 @@
               options
             )
             .then(res => {
-              console.log(res);
+              let time = new Date(res.data);
+              time = time.getTime();
+              const query = {
+                query: `%24bbot()%${deployId}`,
+                live: false,
+                start: time - 1000 * 60 * 10,
+                end: time + 1000 * 60 * 45
+              };
+              console.log(time);
+              window.open(`https://cloud.humio.com/netlify-production/search?query=${query.query}&live=${query.live}&start=${query.start}&end=${query.end})
             })
             .catch(err => console.log(err));
         };
@@ -65,6 +80,7 @@
               onChange={handleChange}
               placeholder="Deploy ID"
             />
+            <button>Open Humio Query</button>
           </form>
         );
       }
