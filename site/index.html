@@ -52,7 +52,7 @@
           };
           fetch(
             `https://suspicious-bartik-35e93d.netlify.com/.netlify/functions/getdeploy/`,
-            { headers: options, body: JSON.stringify(value) }
+            { method: 'POST', headers: options, body: JSON.stringify(value) }
           )
             .then(res => {
               console.log(res.data)
