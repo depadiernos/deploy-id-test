@@ -23,7 +23,6 @@
       src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"
     ></script>
     <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
-    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
     <script src="https://static.zdassets.com/zendesk_app_framework_sdk/2.0/zaf_sdk.min.js"></script>
     <script type="text/babel">
       // Initialise Apps framework client. See also:
@@ -51,23 +50,24 @@
             start: "",
             end: ""
           };
-          axios
-            .post(
-              `https://suspicious-bartik-35e93d.netlify.com/.netlify/functions/getdeploy/`,
-              JSON.stringify(value),
-              options
-            )
+          fetch(
+            `https://suspicious-bartik-35e93d.netlify.com/.netlify/functions/getdeploy/`,
+            { headers: options, body: JSON.stringify(value) }
+          )
             .then(res => {
-              let time = new Date(res.data);
-              time = time.getTime();
-              const query = {
-                query: `%24bbot()%${value.deployId}`,
-                live: false,
-                start: time - 1000 * 60 * 10,
-                end: time + 1000 * 60 * 45
-              };
-              console.log(time);
-              window.open(`https://cloud.humio.com/netlify-production/search?query=${query.query}&live=${query.live}&start=${query.start}&end=${query.end}`)
+              console.log(res.data)
+              // let time = new Date(res.data);
+              // time = time.getTime();
+              // const query = {
+              //   query: `%24bbot()%${value.deployId}`,
+              //   live: false,
+              //   start: time - 1000 * 60 * 10,
+              //   end: time + 1000 * 60 * 45
+              // };
+              // console.log(time);
+              // window.open(
+              //   `https://cloud.humio.com/netlify-production/search?query=${query.query}&live=${query.live}&start=${query.start}&end=${query.end}`
+              // );
             })
             .catch(err => console.log(err));
         };
@@ -79,7 +79,8 @@
               value={value.deployId}
               onChange={handleChange}
               placeholder="Deploy ID"
-            /><br/>
+            />
+            <br />
             <button>Open Humio Query</button>
           </form>
         );
