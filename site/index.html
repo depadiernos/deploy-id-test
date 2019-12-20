@@ -6,7 +6,7 @@
   <body>
     <div id="app">
       <div v-for="deploy in failedDeploys">
-        {{`${deploy}`}}
+        {{`${deploy.id}`}}
       </div>
     </div>
 
@@ -41,12 +41,6 @@
             const ticketData = await client.get("ticket.requester.email")
             app.email = ticketData["ticket.requester.email"] || "depadiernos@gmail.com"
           },
-          getInitialDeploys: async () => {
-            const data = await this.fetchDeploys()
-            const parsedData = await data.json()
-            app.failedDeploys = parsedData
-            console.log(parsedData)
-          },
           fetchDeploys: async () => {
             const deploys = await fetch(`/.netlify/functions/getdeploy`, {
               method: "POST",
@@ -58,7 +52,13 @@
               headers: {
                 "Content-Type": "application/json",
                 Authorization: "m51TdKUXYLw1p6eAQMv9wt4uAyRbmc1i"
-              }
+              },
+          getInitialDeploys: async () => {
+            const data = await this.fetchDeploys()
+            const parsedData = await data.json()
+            app.failedDeploys = parsedData
+            console.log(parsedData)
+          }
             })
             return deploys
           }
