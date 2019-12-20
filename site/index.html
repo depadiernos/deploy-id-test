@@ -37,11 +37,11 @@
           copy: (e) => {
             return document.execCommand("copy")
           },
-          setEmail: async () => {
+          async setEmail() {
             const ticketData = await client.get("ticket.requester.email")
             app.email = ticketData["ticket.requester.email"] || "depadiernos@gmail.com"
           },
-          fetchDeploys: async () => {
+          async fetchDeploys() {
             const deploys = await fetch(`/.netlify/functions/getdeploy`, {
               method: "POST",
               mode: "cors",
@@ -53,7 +53,7 @@
                 "Content-Type": "application/json",
                 Authorization: "m51TdKUXYLw1p6eAQMv9wt4uAyRbmc1i"
               },
-          getInitialDeploys: async () => {
+          async getInitialDeploys() {
             const data = await this.fetchDeploys()
             const parsedData = await data.json()
             app.failedDeploys = parsedData
