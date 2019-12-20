@@ -8,7 +8,7 @@
       <h2>Recent Failed Deploys</h2>
       <div v-for="deploy in failedDeploys">
         <div v-if="deploy.error">
-        <a href=#>{{deploy.id}}</a>
+        <a href='#' @click="openQuery(deploy.id)">{{deploy.id}}</a>
         </div>
       </div>
     </div>
@@ -64,6 +64,19 @@
             const data = await this.fetchDeploys()
             const parsedData = await data.json()
             app.failedDeploys = parsedData
+          },
+          openQuery(id){
+              let time = new Date(res.data);
+              time = time.getTime();
+              const query = {
+                query: `${value.id}`,
+                live: false,
+                start: time - 1000 * 60 * 10,
+                end: time + 1000 * 60 * 45
+              };
+              console.log(time);
+              window.open(`https://cloud.humio.com/netlify-production/search?query=${query.query}&live=${query.live}&start=${query.start}&end=${query.end}`)
+
           }
         }
       })
