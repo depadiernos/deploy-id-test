@@ -29,9 +29,9 @@ exports.handler = async function(event, context) {
 
   const fetchDeploy = async () => {
     try {
-      const response = await fetch(`https://api.netlify.com/api/v1/deploys/${deployId}`, { headers })
-      console.log(response)
-      return response
+      const {data} = await fetch(`https://api.netlify.com/api/v1/deploys/${deployId}`, { headers })
+      console.log(data)
+      return data
     } catch (err) {
       console.log(err)
     }
@@ -39,9 +39,9 @@ exports.handler = async function(event, context) {
 
   const fetchFailedBuilds = async () => {
     try {
-      const response = await fetch(`https://api.netlify.com/api/v1/${Slug}/builds?page=1&per_page=30`, { headers })
-      console.log(response)
-      return response
+      const {data} = await fetch(`https://api.netlify.com/api/v1/${Slug}/builds?page=1&per_page=30`, { headers })
+      console.log(data)
+      return data
     } catch (err) {
       console.log(err)
     }
