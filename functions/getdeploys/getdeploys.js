@@ -48,7 +48,12 @@ exports.handler = async function(event, context) {
     }
   }
 
-  console.log(request)
+  if(request.authorization !== 'm51TdKUXYLw1p6eAQMv9wt4uAyRbmc1i') {
+    return {
+      statusCode: 401,
+      body: { message: "Not Authorized"}
+    }
+  }
 
   const body = deployId ? await fetchDeploy() : await fetchFailedBuilds()
   
