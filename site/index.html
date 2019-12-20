@@ -29,6 +29,10 @@
           failedDeploys: [],
           test: "nothing"
         },
+        mounted() {
+          this.setEmail()
+          this.getInitialDeploys()
+        },
         methods: {
           copy: (e) => {
             return document.execCommand("copy")
@@ -48,20 +52,18 @@
               headers: {
                 "Content-Type": "application/json",
                 Authorization: "m51TdKUXYLw1p6eAQMv9wt4uAyRbmc1i"
-              },
-              async getInitialDeploys() {
-                const data = await this.fetchDeploys()
-                const parsedData = await data.json()
-                app.failedDeploys = parsedData
-                console.log(parsedData)
               }
             })
             return deploys
+          },
+          async getInitialDeploys() {
+            const data = await this.fetchDeploys()
+            const parsedData = await data.json()
+            app.failedDeploys = parsedData
+            console.log(parsedData)
           }
         }
       })
-      app.setEmail()
-      app.getInitialDeploys()
     </script>
   </body>
 </html>
