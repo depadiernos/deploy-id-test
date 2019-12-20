@@ -8,7 +8,7 @@ function extractNetlifySiteFromContext(context) {
 
 exports.handler = async function(event, context) {
   const { deployId, email } = event.body
-  console.log(deployId)
+  console.log(event.body)
 
   const parsedContext = extractNetlifySiteFromContext(context)
   console.log(parsedContext)
@@ -30,6 +30,7 @@ exports.handler = async function(event, context) {
   const fetchDeploy = async () => {
     try {
       const response = await fetch(`https://api.netlify.com/api/v1/deploys/${deployId}`, { headers })
+      console.log(response)
       return response
     } catch (err) {
       console.log(err)
@@ -39,6 +40,7 @@ exports.handler = async function(event, context) {
   const fetchFailedBuilds = async () => {
     try {
       const response = await fetch(`https://api.netlify.com/api/v1/${Slug}/builds?page=1&per_page=30`, { headers })
+      console.log(response)
       return response
     } catch (err) {
       console.log(err)
