@@ -23,7 +23,7 @@ exports.handler = async function(event, context) {
   const fetchDeploy = async () => {
     try {
       const data = await fetch(`https://api.netlify.com/api/v1/deploys/${deployId}`, { headers })
-      return data.json()
+      return await data.json()
     } catch (err) {
       console.log(err)
     }
