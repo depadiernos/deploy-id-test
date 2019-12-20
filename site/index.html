@@ -25,10 +25,11 @@
         el: "#app",
         data: {
           email: "depadiernos@gmail.com",
+          deployId: null,
           failedDeploys: [],
           test: "nothing"
         },
-        mount() {
+        mounted() {
           this.setEmail()
           this.getInitialDeploys()
         },
@@ -51,8 +52,8 @@
               method: "POST",
               mode: "cors",
               body: JSON.stringify({
-                email: email,
-                deployId: deployId
+                email: this.email,
+                deployId: this.deployId
               }),
               headers: {
                 "Content-Type": "application/json",
