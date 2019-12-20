@@ -28,7 +28,7 @@
           failedDeploys: [],
           test: "nothing"
         },
-        mount(){
+        mount() {
           this.setEmail()
           this.getInitialDeploys()
         },
@@ -36,7 +36,7 @@
           copy: (e) => {
             return document.execCommand("copy")
           },
-          setEmail: ()=>{
+          setEmail: async () => {
             const ticketData = await client.get("ticket.requester.email")
             app.email = ticketData["ticket.requester.email"] || "depadiernos@gmail.com"
           },
