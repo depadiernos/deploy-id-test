@@ -7,7 +7,8 @@ function extractNetlifySiteFromContext(context) {
 }
 
 exports.handler = async function(event, context) {
-  const { deployId, email } = JSON.parse(event.body)
+  const request = JSON.parse(event)
+  const { email, deployId} = request.body
 
   const parsedContext = extractNetlifySiteFromContext(context)
   console.log(parsedContext)
@@ -47,8 +48,10 @@ exports.handler = async function(event, context) {
     }
   }
 
+  console.log(request)
+
   const body = deployId ? await fetchDeploy() : await fetchFailedBuilds()
-console.log(body)
+  
   return {
     statusCode: 200,
     body: JSON.stringify(body)
