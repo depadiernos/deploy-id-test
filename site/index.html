@@ -36,9 +36,6 @@
           failedDeploys: [],
           test: "nothing"
         },
-        mount(){
-          this.getInitialDeploys()
-        },
         methods: {
           copy: (e) => {
             return document.execCommand("copy")
@@ -67,6 +64,8 @@
           }
         }
       })
+      app.getInitialDeploys()
+
     </script>
   </body>
 </html>
