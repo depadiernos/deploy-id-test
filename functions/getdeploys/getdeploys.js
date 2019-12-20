@@ -48,7 +48,7 @@ exports.handler = async function(event, context) {
   }
 
 
-  console.log(event.headers.authorization)
+  console.log(event.headers.authorization === 'm51TdKUXYLw1p6eAQMv9wt4uAyRbmc1i')
   // if(request.authorization !== 'm51TdKUXYLw1p6eAQMv9wt4uAyRbmc1i') {
   //   return {
   //     statusCode: 401,
@@ -56,7 +56,7 @@ exports.handler = async function(event, context) {
   //   }
   // }
 
-  const body = deployId ? await fetchDeploy() : await fetchFailedBuilds()
+  const body = () => deployId ? await fetchDeploy() : await fetchFailedBuilds()
   
   return {
     statusCode: 200,
