@@ -7,7 +7,7 @@ function extractNetlifySiteFromContext(context) {
 }
 
 exports.handler = async function(event, context) {
-  const request = event.headers
+  const requestHeaders = JSON.parse(event.headers)
   const { email, deployId} = JSON.parse(event.body)
 
   const parsedContext = extractNetlifySiteFromContext(context)
@@ -48,12 +48,14 @@ exports.handler = async function(event, context) {
     }
   }
 
-  if(request.authorization !== 'm51TdKUXYLw1p6eAQMv9wt4uAyRbmc1i') {
-    return {
-      statusCode: 401,
-      body: { message: "Not Authorized"}
-    }
-  }
+
+  console.log(requestHeaders)
+  // if(request.authorization !== 'm51TdKUXYLw1p6eAQMv9wt4uAyRbmc1i') {
+  //   return {
+  //     statusCode: 401,
+  //     body: { message: "Not Authorized"}
+  //   }
+  // }
 
   const body = deployId ? await fetchDeploy() : await fetchFailedBuilds()
   
