@@ -9,6 +9,6 @@ jobs:
     steps:
     - uses: konradpabjan/actions-add-new-issue-to-column@v1.1
       with:
-        action-token: "${{ secrets.github_actions }}"
+        action-token: "${{ secrets.github_actions2 }}"
         project-url: "https://github.com/depadiernos/projects/1"
         column-name: "close issues"
