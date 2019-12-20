@@ -8,7 +8,7 @@
       <h2>Recent Failed Deploys</h2>
       <div v-for="deploy in failedDeploys">
         <div v-if="deploy.error">
-        <a href='#' @click="openQuery(deploy.id)">{{deploy.id}}</a>
+        <a href='#' @click="openQuery(deploy)">{{deploy.id}}</a>
         </div>
       </div>
     </div>
@@ -65,11 +65,11 @@
             const parsedData = await data.json()
             app.failedDeploys = parsedData
           },
-          openQuery(id){
-              let time = new Date(res.data);
+          openQuery(deploy){
+              let time = new Date(deploy.created_at);
               time = time.getTime();
               const query = {
-                query: `${value.id}`,
+                query: `${deploy.id}`,
                 live: false,
                 start: time - 1000 * 60 * 10,
                 end: time + 1000 * 60 * 45
