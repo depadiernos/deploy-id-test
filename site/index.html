@@ -5,9 +5,10 @@
   </head>
   <body>
     <div id="app">
+      <h2>Recent Failed Deploys</h2>
       <div v-for="deploy in failedDeploys">
         <div v-if="deploy.error">
-        {{`${deploy.id}`}}
+        <a href=#>{{deploy.id}}</a>
         </div>
       </div>
     </div>

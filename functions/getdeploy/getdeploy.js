@@ -37,7 +37,7 @@ exports.handler = async function(event, context) {
         body: null
       })
       const {slug} = await getAccount.json()
-      const data = await fetch(`https://api.netlify.com/api/v1/${slug}/builds?page=1&per_page=30`, {
+      const data = await fetch(`https://api.netlify.com/api/v1/${slug}/builds?page=1&per_page=50`, {
         headers
       })
       const deploys = await data.json()
