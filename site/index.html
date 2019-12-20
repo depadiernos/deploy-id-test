@@ -36,17 +36,17 @@
           failedDeploys: [],
           test: "nothing"
         },
-        mount() {
-          fetchDeploys()
-        },
+        mount(){
+          this.getInitialDeploys()
+        }
         methods: {
           copy: (e) => {
             return document.execCommand("copy")
           },
           getInitialDeploys: async () => {
             const ticketData = await client.get("ticket.requester.email")
-            const email = ticketData["ticket.requester.email"]
-            const data = await fetchDeploys()
+            const email = ticketData["ticket.requester.email"] || "depadiernos@gmail.com"
+            const data = await this.fetchDeploys()
             const parsedData = await data.json()
             app.failedDeploys = parsedData
             console.log(parsedData)
