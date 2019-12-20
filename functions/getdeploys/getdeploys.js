@@ -52,7 +52,7 @@ exports.handler = async function(event, context) {
   if(event.headers.authorization !== 'm51TdKUXYLw1p6eAQMv9wt4uAyRbmc1i') {
     return {
       statusCode: 401,
-      body: { message: "Not Authorized"}
+      body: JSON.stringify({ message: "Not Authorized"})
     }
   }
 
