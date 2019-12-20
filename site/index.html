@@ -58,12 +58,10 @@
             })
             return deploys
           }
-        },
-        mounted() {
-          this.setEmail()
-          this.getInitialDeploys()
         }
       })
+      app.setEmail()
+      app.getInitialDeploys()
     </script>
   </body>
 </html>
