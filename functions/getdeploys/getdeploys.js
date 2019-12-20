@@ -21,12 +21,11 @@ exports.handler = async function(event, context) {
     "Content-Type": "application/json"
   }
 
-
   const fetchDeploy = async () => {
     try {
-      const { data } = await fetch(`https://api.netlify.com/api/v1/deploys/${deployId}`, { headers })
-      console.log(data)
-      return data
+      const data = await fetch(`https://api.netlify.com/api/v1/deploys/${deployId}`, { headers })
+      console.log(data.json())
+      return data.json()
     } catch (err) {
       console.log(err)
     }
@@ -39,9 +38,11 @@ exports.handler = async function(event, context) {
         headers: headers,
         body: null
       })
-      console.log (getAccount)
-      const { data } = await fetch(`https://api.netlify.com/api/v1/${getAccount.data.slug}/builds?page=1&per_page=30`, { headers })
-      console.log(data)
+      console.log(getAccount.json())
+      const data = await fetch(`https://api.netlify.com/api/v1/${getAccount.data.slug}/builds?page=1&per_page=30`, {
+        headers
+      })
+      console.log(data.json())
       return data
     } catch (err) {
       console.log(err)
