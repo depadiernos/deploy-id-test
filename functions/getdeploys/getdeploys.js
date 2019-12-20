@@ -7,7 +7,7 @@ function extractNetlifySiteFromContext(context) {
 }
 
 exports.handler = async function(event, context) {
-  const { deployId, email } = JSON.parse(event.body)
+  const { deployId, email } = event.body
   console.log(deployId)
 
   const parsedContext = extractNetlifySiteFromContext(context)
