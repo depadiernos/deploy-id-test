@@ -49,13 +49,13 @@
             console.log(parsedData)
           },
           fetchDeploys: async () => {
-            await fetch(`/.netlify/functions/getdeploys`, {
-              method: "POST", // or 'PUT'
+            await fetch(`/.netlify/functions/getdeploy`, {
+              method: "POST",
               mode: "cors",
               body: JSON.stringify({
                 email: email,
                 deployId: deployId
-              }), // data can be `string` or {object}!
+              }),
               headers: {
                 "Content-Type": "application/json",
                 Authorization: "m51TdKUXYLw1p6eAQMv9wt4uAyRbmc1i"
