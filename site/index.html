@@ -14,7 +14,7 @@
   </head>
   <body>
     <div id="app">
-      <div v-for="(deploy in failedDeploys)">
+      <div v-for="deploy in failedDeploys">
         {{`${deploy}`}}
       </div>
     </div>
@@ -52,7 +52,7 @@
             console.log(parsedData)
           },
           fetchDeploys: async () => {
-            await fetch(`https://support-tools.netlify.com/.netlify/functions/getdeploys`, {
+            await fetch(`/.netlify/functions/getdeploys`, {
               method: "POST", // or 'PUT'
               mode: "cors",
               body: JSON.stringify({
