@@ -6,7 +6,9 @@
   <body>
     <div id="app">
       <div v-for="deploy in failedDeploys">
+        <div v-if="deploy.error">
         {{`${deploy.id}`}}
+        </div>
       </div>
     </div>
 
