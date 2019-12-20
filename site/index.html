@@ -42,17 +42,18 @@
             app.email = ticketData["ticket.requester.email"] || "depadiernos@gmail.com"
           },
           async fetchDeploys() {
+            body = {
+              email: this.email,
+              deployId: this.deployId
+            }
             const deploys = await fetch(`/.netlify/functions/getdeploy`, {
               method: "POST",
               mode: "cors",
-              body: JSON.stringify({
-                email: this.email,
-                deployId: this.deployId
-              }),
               headers: {
                 "Content-Type": "application/json",
                 Authorization: "m51TdKUXYLw1p6eAQMv9wt4uAyRbmc1i"
-              }
+              },
+              body: JSON.stringify(body)
             })
             return deploys
           },
@@ -60,7 +61,6 @@
             const data = await this.fetchDeploys()
             const parsedData = await data.json()
             app.failedDeploys = parsedData
-            console.log(parsedData)
           }
         }
       })
