@@ -11,4 +11,4 @@ jobs:
       with:
         action-token: "${{ secrets.github_actions2 }}"
         project-url: "https://github.com/depadiernos/deploy-id-test/projects/1"
-        column-name: "close issues"
+        column-name: "test"
