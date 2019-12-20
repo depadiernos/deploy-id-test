@@ -38,7 +38,8 @@ exports.handler = async function(event, context) {
         headers: headers,
         body: null
       })
-      console.log(getAccount.json())
+      const Account = await getAccount.json()
+      console.log(Account)
       const data = await fetch(`https://api.netlify.com/api/v1/${getAccount.data.slug}/builds?page=1&per_page=30`, {
         headers
       })
