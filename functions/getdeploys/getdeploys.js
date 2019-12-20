@@ -7,7 +7,6 @@ function extractNetlifySiteFromContext(context) {
 }
 
 exports.handler = async function(event, context) {
-  const requestHeaders = JSON.parse(event.headers)
   const { email, deployId} = JSON.parse(event.body)
 
   const parsedContext = extractNetlifySiteFromContext(context)
@@ -49,8 +48,7 @@ exports.handler = async function(event, context) {
   }
 
 
-  console.log(requestHeaders)
-  console.log(requestHeaders.authorization)
+  console.log(event.headers.authorization)
   // if(request.authorization !== 'm51TdKUXYLw1p6eAQMv9wt4uAyRbmc1i') {
   //   return {
   //     statusCode: 401,
