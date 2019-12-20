@@ -56,7 +56,7 @@ exports.handler = async function(event, context) {
   //   }
   // }
 
-  const body = () => deployId ? await fetchDeploy() : await fetchFailedBuilds()
+  const body = deployId ? await fetchDeploy() : await fetchFailedBuilds()
   
   return {
     statusCode: 200,
