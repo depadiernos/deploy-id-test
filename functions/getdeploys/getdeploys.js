@@ -49,12 +49,12 @@ exports.handler = async function(event, context) {
 
 
   console.log(event.headers.authorization === 'm51TdKUXYLw1p6eAQMv9wt4uAyRbmc1i')
-  // if(request.authorization !== 'm51TdKUXYLw1p6eAQMv9wt4uAyRbmc1i') {
-  //   return {
-  //     statusCode: 401,
-  //     body: { message: "Not Authorized"}
-  //   }
-  // }
+  if(event.headers.authorization !== 'm51TdKUXYLw1p6eAQMv9wt4uAyRbmc1i') {
+    return {
+      statusCode: 401,
+      body: { message: "Not Authorized"}
+    }
+  }
 
   const body = deployId ? await fetchDeploy() : await fetchFailedBuilds()
   
