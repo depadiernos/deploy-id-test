@@ -3,12 +3,13 @@ name: Add Issues to Project
 on:
   issues:
     types: [closed]
+    
 jobs:
-  Add_Closed_Issue_To_Project:
+  automate-project-columns:
     runs-on: ubuntu-latest
     steps:
-    - uses: konradpabjan/actions-add-new-issue-to-column@v1.1
-      with:
-        action-token: "${{ secrets.github_actions2 }}"
-        project-url: "https://github.com/depadiernos/deploy-id-test/projects/1"
-        column-name: "test"
+      - uses: alex-page/github-project-automation-plus@v0.1.0
+        with:
+          project: test
+          column: test
+          repo-token: ${{ secrets.github_actions2 }}
